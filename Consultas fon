@@ -1,0 +1,35 @@
+-- CONSULTAS
+-- 1
+SELECT * FROM Usuario WHERE status='ATIVO' ORDER BY nome;
+-- 2
+SELECT DISTINCT tipo FROM Conteudo;
+-- 3
+SELECT * FROM Conteudo WHERE ano_lancamento BETWEEN 2015 AND 2025;
+-- 4
+SELECT * FROM Usuario WHERE nome LIKE 'Usuario%';
+-- 5
+SELECT * FROM Plano ORDER BY valor_mensal DESC LIMIT 5;
+
+-- 6 INNER JOIN
+SELECT u.nome,p.nome_plano
+FROM Usuario u INNER JOIN Assinatura a ON u.id_usuario=a.id_usuario
+INNER JOIN Plano p ON p.id_plano=a.id_plano;
+
+-- 7 COUNT
+SELECT c.titulo,COUNT(av.id_avaliacao) qtd
+FROM Conteudo c LEFT JOIN Avaliacao av ON c.id_conteudo=av.id_conteudo
+GROUP BY c.id_conteudo;
+
+-- 8 AVG
+SELECT c.titulo,AVG(av.nota) media
+FROM Conteudo c JOIN Avaliacao av ON c.id_conteudo=av.id_conteudo
+GROUP BY c.titulo HAVING AVG(av.nota)>=3;
+
+-- 9 MAX/MIN
+SELECT MAX(valor_mensal) maior, MIN(valor_mensal) menor FROM Plano;
+
+-- 10 Subquery
+SELECT titulo FROM Conteudo
+WHERE id_conteudo IN (
+ SELECT id_conteudo FROM Avaliacao GROUP BY id_conteudo HAVING AVG(nota)>=4
+);

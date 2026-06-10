@@ -1,4 +1,4 @@
--- 1. Buscar usuários ativos (Ajustado para o nome da tabela em letras minúsculas)
+-- 1. Buscar usuários ativos 
 SELECT * FROM usuario 
 WHERE status = 'ATIVO' 
 ORDER BY nome;
@@ -11,7 +11,7 @@ FROM conteudo;
 SELECT * FROM conteudo 
 WHERE ano_lancamento BETWEEN 2015 AND 2025;
 
--- 4. Buscar usuário por nome (Adaptado de 'Usuario%' para 'A%' para retornar dados reais da sua carga de testes, como 'Ana Souza')
+-- 4. Buscar usuário por nome 
 SELECT * FROM usuario 
 WHERE nome LIKE 'A%';
 

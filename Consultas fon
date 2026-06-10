@@ -1,35 +1,54 @@
--- CONSULTAS
--- 1
-SELECT * FROM Usuario WHERE status='ATIVO' ORDER BY nome;
--- 2
-SELECT DISTINCT tipo FROM Conteudo;
--- 3
-SELECT * FROM Conteudo WHERE ano_lancamento BETWEEN 2015 AND 2025;
--- 4
-SELECT * FROM Usuario WHERE nome LIKE 'Usuario%';
--- 5
-SELECT * FROM Plano ORDER BY valor_mensal DESC LIMIT 5;
+-- 1. Buscar usuários ativos (Ajustado para o nome da tabela em letras minúsculas)
+SELECT * FROM usuario 
+WHERE status = 'ATIVO' 
+ORDER BY nome;
 
--- 6 INNER JOIN
-SELECT u.nome,p.nome_plano
-FROM Usuario u INNER JOIN Assinatura a ON u.id_usuario=a.id_usuario
-INNER JOIN Plano p ON p.id_plano=a.id_plano;
+-- 2. Listar tipos distintos de conteúdo
+SELECT DISTINCT tipo 
+FROM conteudo;
 
--- 7 COUNT
-SELECT c.titulo,COUNT(av.id_avaliacao) qtd
-FROM Conteudo c LEFT JOIN Avaliacao av ON c.id_conteudo=av.id_conteudo
-GROUP BY c.id_conteudo;
+-- 3. Filtrar conteúdos por intervalo de ano
+SELECT * FROM conteudo 
+WHERE ano_lancamento BETWEEN 2015 AND 2025;
 
--- 8 AVG
-SELECT c.titulo,AVG(av.nota) media
-FROM Conteudo c JOIN Avaliacao av ON c.id_conteudo=av.id_conteudo
-GROUP BY c.titulo HAVING AVG(av.nota)>=3;
+-- 4. Buscar usuário por nome (Adaptado de 'Usuario%' para 'A%' para retornar dados reais da sua carga de testes, como 'Ana Souza')
+SELECT * FROM usuario 
+WHERE nome LIKE 'A%';
 
--- 9 MAX/MIN
-SELECT MAX(valor_mensal) maior, MIN(valor_mensal) menor FROM Plano;
+-- 5. Top 5 planos mais caros
+SELECT * FROM plano 
+ORDER BY valor_mensal DESC 
+LIMIT 5;
 
--- 10 Subquery
-SELECT titulo FROM Conteudo
+-- 6. INNER JOIN: Relacionar usuários, assinaturas e planos
+SELECT u.nome, p.nome_plano
+FROM usuario u 
+INNER JOIN assinatura a ON u.id_usuario = a.id_usuario
+INNER JOIN plano p ON p.id_plano = a.id_plano;
+
+-- 7. COUNT: Contar avaliações por conteúdo (Adicionado c.id_conteudo no GROUP BY para evitar erros no modo ONLY_FULL_GROUP_BY do MySQL)
+SELECT c.titulo, COUNT(av.id_avaliacao) AS qtd
+FROM conteudo c 
+LEFT JOIN avaliacao av ON c.id_conteudo = av.id_conteudo
+GROUP BY c.id_conteudo, c.titulo;
+
+-- 8. AVG: Média de notas com filtro HAVING (Também ajustado o GROUP BY para compatibilidade estrita)
+SELECT c.titulo, AVG(av.nota) AS media
+FROM conteudo c 
+JOIN avaliacao av ON c.id_conteudo = av.id_conteudo
+GROUP BY c.id_conteudo, c.titulo 
+HAVING AVG(av.nota) >= 3;
+
+-- 9. MAX/MIN: Maior e menor valor de plano
+SELECT MAX(valor_mensal) AS maior, MIN(valor_mensal) AS menor 
+FROM plano;
+
+-- 10. Subquery: Títulos com média de notas maior ou igual a 4
+SELECT titulo 
+FROM conteudo
 WHERE id_conteudo IN (
- SELECT id_conteudo FROM Avaliacao GROUP BY id_conteudo HAVING AVG(nota)>=4
+    SELECT id_conteudo 
+    FROM avaliacao 
+    GROUP BY id_conteudo 
+    HAVING AVG(nota) >= 4
 );

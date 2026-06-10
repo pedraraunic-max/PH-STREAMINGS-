@@ -1,6 +1,6 @@
-# 🎬 Plataforma de Streaming - Projeto de Banco de Dados MySQL
+#  Plataforma de Streaming - Projeto de Banco de Dados MySQL
 
-## 📖 Sobre o Projeto
+##  Sobre o Projeto
 
 Este projeto consiste no desenvolvimento de um Banco de Dados Relacional para uma plataforma de streaming de vídeos semelhante à Netflix, Disney+, Prime Video ou Max.
 
@@ -10,7 +10,7 @@ O projeto foi desenvolvido seguindo os conceitos de modelagem relacional, normal
 
 ---
 
-# 🎯 Objetivo
+#  Objetivo
 
 Criar uma estrutura de banco de dados capaz de armazenar e gerenciar informações relacionadas ao funcionamento de uma plataforma de streaming, permitindo:
 
@@ -24,7 +24,7 @@ Criar uma estrutura de banco de dados capaz de armazenar e gerenciar informaçõ
 
 ---
 
-# 🏗️ Tecnologias Utilizadas
+#  Tecnologias Utilizadas
 
 - MySQL 8.0+
 - MySQL Workbench
@@ -33,7 +33,7 @@ Criar uma estrutura de banco de dados capaz de armazenar e gerenciar informaçõ
 
 ---
 
-# 📋 Regras de Negócio
+#  Regras de Negócio
 
 ## Usuários
 
@@ -63,7 +63,7 @@ Cada reprodução deve armazenar:
 
 ---
 
-# 🗄️ Estrutura do Banco de Dados
+#  Estrutura do Banco de Dados
 
 O banco é composto por 9 tabelas principais:
 
@@ -171,7 +171,7 @@ Usuario
 
 ---
 
-# 🔒 Restrições Implementadas
+#  Restrições Implementadas
 
 ## Chaves Primárias
 
@@ -252,7 +252,7 @@ DEFAULT 'ATIVO'
 
 ---
 
-# 🧠 Normalização
+#  Normalização
 
 O banco foi normalizado até a Terceira Forma Normal (3FN).
 
@@ -272,7 +272,7 @@ O banco foi normalizado até a Terceira Forma Normal (3FN).
 
 ---
 
-# 📈 Consultas Implementadas
+#  Consultas Implementadas
 
 O projeto possui consultas utilizando:
 
@@ -295,7 +295,7 @@ O projeto possui consultas utilizando:
 
 ---
 
-# 🚀 Como Executar
+#  Como Executar
 
 ## 1. Criar o Banco
 
